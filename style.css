@@ -1,0 +1,28 @@
+.line {
+    display: flex;
+}
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+}
+.wall {
+    background-color: black;
+}
+.road {
+    background-color: lightgray;
+}
+.start {
+    background-color: lightblue;
+}
+.finish {
+    background-color: red;
+}
+.player {
+    background-color: yellow;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
