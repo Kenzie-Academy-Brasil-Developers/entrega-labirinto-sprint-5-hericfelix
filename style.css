@@ -1,3 +1,93 @@
+@keyframes slideRight {
+    from {margin-left: -45px;}
+    to {margin-left: 0;}
+    }
+
+@keyframes slideUp {
+    from {margin-bottom: -45px;}
+    to {margin-bottom: 0;}
+    }
+
+@keyframes slideLeft {
+    from {margin-right: -45px;}
+    to {margin-right: 0;}
+    }
+
+@keyframes slideDown {
+    from {margin-top: -45px;}
+    to {margin-top: 0;}
+    }
+@keyframes death {
+    from {margin-left: 0;}
+    to {margin-left: 45px;}
+    }
+ 
+body {
+    background-image: url(assets/sprites/background.png);
+    background-position: top;
+    background-size: cover;
+
+}
+figcaption {
+    display: none;
+}
+.opening {
+margin-top: 100px;
+}
+    .opening__title {
+        text-align: center;
+    }
+        .opening__title img {
+            width: 400px;
+        }
+    .opening__menu {
+        margin: 0 auto;
+        margin-top: 150px;
+        background-image: url(assets/sprites/chat.png);
+        background-color: black;
+        background-position: top;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 520px;
+        height: 134px;
+        display: flex;
+        padding: 40px 70px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        align-items: center;
+    }
+        .menu__fairy {
+            margin: 0;
+            margin-right: 20px;
+        }
+            .menu__fairy img {
+                width: 40px;
+            }
+        .menu__start p{
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 600;
+            font-family: 'Biryani';
+            color: white;
+            -webkit-text-stroke: 1px blue;
+        }
+
+.mazeDiv {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(50%, 50%);
+}
+
+
+.hidden {
+    opacity: 0;
+}
+
+.none {
+    display: none;
+}
+
 .line {
     display: flex;
 }
@@ -5,24 +95,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
+}
+.log {
+    background-image: url(assets/sprites/structures/stump.png);
+    background-size: contain;
+}
+.bush {
+    background-image: url(assets/sprites/structures/bushes.png);
+    background-size: contain;
 }
 .wall {
-    background-color: black;
+    background-image: url(assets/sprites/structures/stones.png);
+    background-size: contain;
 }
 .road {
-    background-color: lightgray;
+    background-image: url(assets/sprites/structures/road.png);
+    background-position: top;
+    background-size: contain;
 }
-.start {
-    background-color: lightblue;
-}
-.finish {
-    background-color: red;
-}
+
 .player {
-    background-color: yellow;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
+    background-image: url(assets/sprites/movement/link-Right.png);
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 41px;
+    height: 40px;
+    animation-duration: 100ms;
+}
+.princess {
+    background-image: url(assets/sprites/zelda.png);
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 41px;
+    height: 40px;
+}
+.ganon {
+    position: absolute;
+    background-image: url(assets/sprites/ganon.png);
+    width: 70px;
+    height: 43px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+    animation-duration: 1300ms;
+}
+.ganon-death {
+    height: 55px;
+}
+.triforce {
+    background-image: url(assets/sprites/structures/triforce.png);
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-position: top;
+}
+.slideRight {
+    animation-name: slideRight;
+    }
+
+.slideUp {
+    animation-name: slideUp;
+    }
+
+.slideLeft {
+    animation-name: slideLeft;
+    }
+
+.slideDown {
+    animation-name: slideDown;
+    }
+
+.death {
+    animation-name: death;
+}
+
+.link-triforce{
+    height: 99px;
 }

@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Labirinto</title>
 </head>
 <body>
-    <div class="maze"></div>
+    <main>
+        <section class="opening">
+            <h1 class="opening__title">
+                <img src="assets/sprites/title.png" alt="title.png">
+            </h1>
+            <div class="opening__menu menu">
+                <figure class="menu__fairy">
+                    <img src="assets/sprites/fairy.gif" alt="fairy.gif">
+                    <figcaption>Fairy gif</figcaption>
+                </figure>
+                <div class="menu__start">
+                    <p>START GAME</p>
+                </div>
+            </div>
+        </section>
+        <section class="mazeDiv none hidden">
+            <div class="maze"></div>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
