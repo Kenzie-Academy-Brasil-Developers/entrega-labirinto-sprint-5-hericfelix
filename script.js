@@ -13,29 +13,47 @@ const triforce = document.createElement('div')
 triforce.classList.add('triforce')
 
 const openingDiv = document.querySelector('.opening')
+openingDiv.classList.remove('opening-animation')
+
 const mazeDiv = document.querySelector('.mazeDiv')
 
 const startGame = document.querySelector('.menu__start')
+
 
 let hasTriforce = false;
 let start = [0, 0];
 let playerPosition = [];
 let ganonPosition = [];
 let gameLevel = 1;
+let listener = false;
 
 const maps = {
     1: [
-    "BBBBBBBBBB",
-    "S B      B",
-    "B B BBBB B",
-    "B B B    B",
-    "B B B BBBB",
-    "B B B    F",
-    "B   BBBB B",
-    "BBBBBBBBBB",
+        "BBBBBBBBBB",
+        "S B      B",
+        "B B BBBB B",
+        "B B B    B",
+        "B B B BBBB",
+        "B B B    B",
+        "B   BBBB F",
+        "BBBBBBBBBB"
     ],
     2: [
-
+        "BBBBBBBBBBBBBBB",
+        "B             B",
+        "B BBBB BBBBBB B",
+        "BBB         B B",
+        "B BBBB BBBB B B",
+        "B B       BBB B",
+        "B BBBBBBB B   B",
+        "B B     B B B B",
+        "B B B B B B B B",
+        "B B B B B B B B",
+        "B   B B   B B B",
+        "BBBBB B B B   B",
+        "S     B BBBBB F",
+        "B     B     B B",
+        "BBBBBBBBBBBBBBB"
     ],
     3: [
         "BBWBBBLBBBBBWWBBBBBWB",
@@ -51,28 +69,12 @@ const maps = {
         "WBBBB B B B W B L B B",
         "B     W B B   B B B B",
         "B WBBBBBW BWBBB B B W",
-        "B       W       B   W",
-        "WLBBBWBBBBBLBBLBBWBBB",
+        "B               B   W",
+        "WLBBBWBBBBBLBBLBBWBBB"
     ]
 };
 
-
-
-const showSection = (section) => {
-    section.classList.remove('none');
-    setTimeout( () => {
-        section.classList.remove('hidden')
-    }, 100)
-}
-
-const hideSection = (section) => {
-    section.classList.add('hidden')
-    setTimeout( () => {
-        section.classList.remove('none')
-    }, 400)
-}
-
-const classes =  {
+const cellClasses =  {
     'W': 'wall',
     ' ': 'road',
     'S': 'road',
@@ -84,6 +86,38 @@ const classes =  {
     'P': 'road',
     'T': 'road'
 }
+
+const messages = {
+    'intro': "Use the arrow keys to make your way through the maze and find the princess!",
+    'next': "You're one step closer to find her!",
+    'hole': "You fell into a hole. Try again!",
+    'ganon': "You can't face Ganon with the power you have now"
+}
+
+const showSection = (section) => {
+    section.classList.remove('none');
+    setTimeout( () => {
+        section.classList.remove('hidden')
+    }, 100)
+}
+
+const hideSection = (section) => {
+    section.classList.add('hidden')
+    setTimeout( () => {
+        section.classList.add('none')
+    }, 1200)
+}
+
+const toggleKeyboardListener = () => {
+    if (listener === false) {
+        document.addEventListener('keydown', moveCapture)
+    }
+    if (listener === true) {
+        document.removeEventListener('keydown', moveCapture)
+    }
+}
+
+
 
 const playerInitialPosition = () => {
     let startingLine = maze.childNodes[start[1]];
@@ -98,7 +132,7 @@ const cellGenerator = (line, cell, level) => {
     let cellDiv = document.createElement('div');
     let cellContent = maps[level][line][cell];
 
-    cellDiv.classList.add(classes[cellContent], 'cell');
+    cellDiv.classList.add(cellClasses[cellContent], 'cell');
 
     if (cellContent === 'G') {
         cellDiv.appendChild(ganon)
@@ -117,6 +151,7 @@ const cellGenerator = (line, cell, level) => {
 };
 
 const generateMaze = (level) => {
+    maze.innerHTML = "";
     for (let line = 0; line < maps[level].length; line++){
         let lineDiv = document.createElement('div');
 
@@ -138,6 +173,10 @@ const movePlayer = (line, column) => {
     divToMoveTo.appendChild(player);
     playerPosition = [column, line];
 };
+
+const nextLevel = () => {
+
+}
 
 const getTriforce = (direction) => {
     hasTriforce = true
@@ -183,6 +222,8 @@ const movementAction = (level,lineToMoveTo, cellToMoveTo, movementDirection) => 
         movementAnimation(movementDirection)
     }
     if (cellContent === 'F') {
+        movePlayer(lineToMoveTo, cellToMoveTo)
+        movementAnimation(movementDirection)
         console.log('Next Level!')
     }
     if (cellContent === 'T') {
@@ -237,4 +278,11 @@ const moveCapture = (evt) => {
     setTimeout(movement[keyPressed](),150);
 }
 
-document.addEventListener('keydown', moveCapture)
+startGame.addEventListener('click', () => {
+    generateMaze(gameLevel)
+    toggleKeyboardListener();
+    hideSection(openingDiv);
+    showSection(mazeDiv);
+})
+
+// estava fazendo as mensagens, preciso fazer a div que mostra as mensagens e a tela de transicao //

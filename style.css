@@ -31,8 +31,15 @@ body {
 figcaption {
     display: none;
 }
+
 .opening {
 margin-top: 100px;
+transition-duration: 1.5s;
+}
+
+.opening-animation {
+    margin-top: -10%;
+    opacity: 0;
 }
     .opening__title {
         text-align: center;
@@ -76,7 +83,8 @@ margin-top: 100px;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(50%, 50%);
+    transform: translate(-50%, -50%);
+    transition-duration: 1s;
 }
 
 

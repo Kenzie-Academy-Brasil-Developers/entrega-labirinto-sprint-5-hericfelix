@@ -7,12 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
-    <title>Labirinto</title>
+    <title>Labirin</title>
 </head>
 <body>
     <main>
-        <section class="opening">
+        <section class="opening opening-animation">
             <h1 class="opening__title">
                 <img src="assets/sprites/title.png" alt="title.png">
             </h1>
@@ -28,6 +30,9 @@
         </section>
         <section class="mazeDiv none hidden">
             <div class="maze"></div>
+        </section>
+        <section class="msgs">
+            <p></p>
         </section>
     </main>
     <script src="script.js"></script>
