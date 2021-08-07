@@ -54,6 +54,7 @@ let playerPosition = [];
 let ganonPosition = [];
 let gameLevel = 1;
 let listener = false;
+const ganonString = "B B H B   W B  G  W B";
 
 const maps = {
     1: [
@@ -347,7 +348,6 @@ startGame.addEventListener('click', () => {
     if (!songPlaying){
         playSong()
     }
-    gameLevel = 1
     generateMaze(gameLevel)
     toggleKeyboardListener();
     hideSection(openingDiv);
@@ -356,6 +356,9 @@ startGame.addEventListener('click', () => {
 })
 
 backToMenu.addEventListener('click', () => {
+    gameLevel = 1;
+    hasTriforce = false;
+    maps[3].splice(7,1, ganonString)
     hideSection(victoryScreen)
     showSection(openingDiv)
 })
