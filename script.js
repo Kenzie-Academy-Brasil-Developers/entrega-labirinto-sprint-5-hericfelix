@@ -363,6 +363,7 @@ startGame.addEventListener('click', () => {
 backToMenu.addEventListener('click', () => {
     gameLevel = 1;
     hasTriforce = false;
+    ganonRestart()
     hideSection(victoryScreen)
     showSection(openingDiv)
 })
