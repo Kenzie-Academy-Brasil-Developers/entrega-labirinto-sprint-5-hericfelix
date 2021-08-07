@@ -236,6 +236,11 @@ const ganonDeath = (level) => {
     }, 1250)
 }
 
+const ganonRestart = () => {
+    ganon.style.backgroundImage = 'url(assets/sprites/ganon.png)'
+    maps[3].splice(7,1, ganonString)
+    ganon.classList.remove('ganon-death', 'death')
+}
 const movementAnimation = (direction) => {
     player.style.backgroundImage = `url(assets/sprites/movement/link-${direction}.png)`
     player.classList.add(`slide${direction}`);
@@ -358,7 +363,6 @@ startGame.addEventListener('click', () => {
 backToMenu.addEventListener('click', () => {
     gameLevel = 1;
     hasTriforce = false;
-    maps[3].splice(7,1, ganonString)
     hideSection(victoryScreen)
     showSection(openingDiv)
 })
