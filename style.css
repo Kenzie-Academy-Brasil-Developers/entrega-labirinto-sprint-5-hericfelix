@@ -1,20 +1,20 @@
 @keyframes slideRight {
-    from {margin-left: -45px;}
+    from {margin-left: -25px;}
     to {margin-left: 0;}
     }
 
 @keyframes slideUp {
-    from {margin-bottom: -45px;}
+    from {margin-bottom: -25px;}
     to {margin-bottom: 0;}
     }
 
 @keyframes slideLeft {
-    from {margin-right: -45px;}
+    from {margin-right: -25px;}
     to {margin-right: 0;}
     }
 
 @keyframes slideDown {
-    from {margin-top: -45px;}
+    from {margin-top: -25px;}
     to {margin-top: 0;}
     }
 @keyframes death {
@@ -24,17 +24,27 @@
  
 body {
     background-image: url(assets/sprites/background.png);
-    background-position: top;
     background-size: cover;
-
+    background-repeat: no-repeat;
+    background-color: #8494de;
 }
 figcaption {
     display: none;
 }
 
+.audio {
+    position: absolute;
+    width: 40px;
+    right: 5%;
+    top: 1%;
+    cursor: pointer;
+}
+.audio img {
+    width: 100%
+}
 .opening {
-margin-top: 100px;
-transition-duration: 1.5s;
+margin-top: 10%;
+transition-duration: 1s;
 }
 
 .opening-animation {
@@ -86,8 +96,64 @@ transition-duration: 1.5s;
     transform: translate(-50%, -50%);
     transition-duration: 1s;
 }
+.msgs {
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    width: 320px;
+    bottom: 5%;
+    transform: translateX(-50%);
+    background-image: url(assets/sprites/chat.png);
+    padding: 20px;
+    box-sizing: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 82px;
+    transition-duration: 1000ms;
+}
+    .msgs__text {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Biryani';
+        color: white;
+        -webkit-text-stroke: 0.5px blue;
+    }
 
-
+.victory {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 615px;
+    height: 159.5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url(assets/sprites/chat.png);
+    background-color: black;
+    padding: 25px;
+    box-sizing: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+    .victory p {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Biryani';
+        color: white;
+        -webkit-text-stroke: 0.5px blue;
+    }
+    .victory button {
+        margin-right: 43px;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        font-size: 22px;
+        font-weight: 600;
+        font-family: 'Biryani';
+        color: white;
+        -webkit-text-stroke: 1px blue;
+    }
 .hidden {
     opacity: 0;
 }
@@ -123,6 +189,11 @@ transition-duration: 1.5s;
     background-position: top;
     background-size: contain;
 }
+.hole {
+    background-image: url(assets/sprites/structures/hole.png);
+    background-position: top;
+    background-size: contain;
+}
 
 .player {
     background-image: url(assets/sprites/movement/link-Right.png);
@@ -131,7 +202,7 @@ transition-duration: 1.5s;
     background-repeat: no-repeat;
     width: 41px;
     height: 40px;
-    animation-duration: 100ms;
+    animation-duration: 500ms;
 }
 .princess {
     background-image: url(assets/sprites/zelda.png);
@@ -149,7 +220,7 @@ transition-duration: 1.5s;
     background-repeat: no-repeat;
     background-position: top left;
     background-size: cover;
-    animation-duration: 1300ms;
+    animation-duration: 1250ms;
 }
 .ganon-death {
     height: 55px;

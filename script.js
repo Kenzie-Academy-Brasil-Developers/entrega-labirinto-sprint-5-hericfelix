@@ -17,9 +17,37 @@ openingDiv.classList.remove('opening-animation')
 
 const mazeDiv = document.querySelector('.mazeDiv')
 
+const msgDiv = document.querySelector('.msgs')
+const msgsParagraph = document.getElementById('msgsText')
+
 const startGame = document.querySelector('.menu__start')
 
+const victoryScreen = document.querySelector('.victory')
 
+const backToMenu = document.getElementById('backToMenu')
+
+const audioPlayButton = document.querySelector('.audio > img')
+
+const music = new Audio('assets/audio/intro-hyruleMainTheme.ogg');
+
+const playSong = () => {
+    if (songPlaying){
+    music.pause()
+    songPlaying = false
+    audioPlayButton.src = 'assets/audio/play.png'
+    } else {
+        music.src = 'assets/audio/intro-hyruleMainTheme.ogg'
+        music.play();
+        songPlaying = true
+        audioPlayButton.src = 'assets/audio/pause.png'
+        setTimeout(() => {
+            music.src = 'assets/audio/hyrule-theme.ogg';
+            music.play()
+            music.loop = true
+        }, 7173)
+    }
+}
+let songPlaying = false;
 let hasTriforce = false;
 let start = [0, 0];
 let playerPosition = [];
@@ -29,47 +57,47 @@ let listener = false;
 
 const maps = {
     1: [
-        "BBBBBBBBBB",
+        "BWBBLBBWBB",
         "S B      B",
-        "B B BBBB B",
-        "B B B    B",
-        "B B B BBBB",
-        "B B B    B",
-        "B   BBBB F",
-        "BBBBBBBBBB"
+        "B B BBBW B",
+        "L B B    B",
+        "B B B BBWB",
+        "B W B    B",
+        "B   BLLB F",
+        "BBLBBBBBBW"
     ],
     2: [
-        "BBBBBBBBBBBBBBB",
+        "BBBBWBBBBBBBWBB",
         "B             B",
-        "B BBBB BBBBBB B",
+        "LHBBBL LBBBBB B",
         "BBB         B B",
-        "B BBBB BBBB B B",
-        "B B       BBB B",
-        "B BBBBBBB B   B",
+        "B WBBB BBBB B L",
+        "B B       BBW B",
+        "B BBBBWBB B   B",
         "B B     B B B B",
-        "B B B B B B B B",
-        "B B B B B B B B",
+        "L B B B L B WHB",
+        "B BHB B B B B B",
         "B   B B   B B B",
-        "BBBBB B B B   B",
-        "S     B BBBBB F",
-        "B     B     B B",
-        "BBBBBBBBBBBBBBB"
+        "BBBBL B B B   B",
+        "S  H  B BBLBB F",
+        "B     B  H  W B",
+        "BBBWBBBBBLBBBBB"
     ],
     3: [
         "BBWBBBLBBBBBWWBBBBBWB",
         "B   B     B     L B B",
-        "L B B BBW BBWBB W B B",
-        "B B B  TW     B B   B",
+        "L B BHBBW BBWBB WHB B",
+        "B B B   W    HB B   B",
         "W BWBBLBB B LBB B B L",
         "B         B     B B B",
         "B BBL BBBBB BBBLB B B",
-        "B B   B   W B     W B",
+        "B B H B   W B  G  W B",
         "W BBBBB B B B BBB B P",
-        "S  G  B B B B B B BLB",
+        "S     B B B B B B BLB",
         "WBBBB B B B W B L B B",
-        "B     W B B   B B B B",
+        "B     WTB B   B B B B",
         "B WBBBBBW BWBBB B B W",
-        "B               B   W",
+        "B          H    B   W",
         "WLBBBWBBBBBLBBLBBWBBB"
     ]
 };
@@ -88,10 +116,10 @@ const cellClasses =  {
 }
 
 const messages = {
-    'intro': "Use the arrow keys to make your way through the maze and find the princess!",
-    'next': "You're one step closer to find her!",
+    'intro': "Use the arrow keys to make your way through the maze and find princess Zelda!",
+    'next': "You're one step closer to finding her!",
     'hole': "You fell into a hole. Try again!",
-    'ganon': "You can't face Ganon with the power you have now"
+    'ganon': "You can't face Ganon with the power you have now."
 }
 
 const showSection = (section) => {
@@ -105,7 +133,7 @@ const hideSection = (section) => {
     section.classList.add('hidden')
     setTimeout( () => {
         section.classList.add('none')
-    }, 1200)
+    }, 800)
 }
 
 const toggleKeyboardListener = () => {
@@ -116,8 +144,6 @@ const toggleKeyboardListener = () => {
         document.removeEventListener('keydown', moveCapture)
     }
 }
-
-
 
 const playerInitialPosition = () => {
     let startingLine = maze.childNodes[start[1]];
@@ -174,13 +200,17 @@ const movePlayer = (line, column) => {
     playerPosition = [column, line];
 };
 
-const nextLevel = () => {
-
-}
-
 const getTriforce = (direction) => {
     hasTriforce = true
 
+    let triforceSound = new Audio('assets/audio/secret.ogg')
+    
+    triforceSound.play()
+    if (songPlaying) {
+        music.pause()
+        setTimeout(() => {music.play()}, 1800)
+    }
+    
     triforce.remove();
     player.classList.add('link-triforce');
     player.style.backgroundImage = 'url(assets/sprites/movement/link-triforce.png)'
@@ -193,7 +223,7 @@ const getTriforce = (direction) => {
 
         document.addEventListener('keydown', moveCapture)
 
-    }, 1500)
+    }, 2500)
 }
 
 const ganonDeath = (level) => {
@@ -210,7 +240,7 @@ const movementAnimation = (direction) => {
     player.classList.add(`slide${direction}`);
     setTimeout(() => {
         player.classList.remove(`slide${direction}`)}
-        , 40);
+        , 45);
 }
 
 
@@ -224,7 +254,8 @@ const movementAction = (level,lineToMoveTo, cellToMoveTo, movementDirection) => 
     if (cellContent === 'F') {
         movePlayer(lineToMoveTo, cellToMoveTo)
         movementAnimation(movementDirection)
-        console.log('Next Level!')
+        nextLevel()
+        showMsg('next')
     }
     if (cellContent === 'T') {
         movePlayer(lineToMoveTo, cellToMoveTo);
@@ -232,16 +263,18 @@ const movementAction = (level,lineToMoveTo, cellToMoveTo, movementDirection) => 
         getTriforce(movementDirection)
     }
     if (cellContent === 'H') {
-        console.log('You died!')
+        showMsg('hole')
+
+        playerInitialPosition()
     }
     if (cellContent === 'P') {
-        console.log('You saved the princess!')
+        victory()
     }
     if (cellContent === 'G' && !hasTriforce) {
-        console.log("You can't defeat Ganon without the triforce!!")
+        showMsg('ganon')
     }
     if (cellContent === 'G' && hasTriforce) {
-        ganonDeath()
+        ganonDeath(gameLevel)
     }
 }
 
@@ -278,11 +311,53 @@ const moveCapture = (evt) => {
     setTimeout(movement[keyPressed](),150);
 }
 
+const nextLevel = () => {
+    gameLevel++;
+    hideSection(mazeDiv);
+    toggleKeyboardListener();
+    setTimeout(() => {
+        generateMaze(gameLevel)
+        showSection(mazeDiv);
+        toggleKeyboardListener();
+    }, 1210);
+};
+
+const showMsg = (msg) => {
+    if (msg === 'intro') {
+        showSection(msgDiv)
+        msgsParagraph.innerText = messages[msg];
+        setTimeout(() => {
+            hideSection(msgDiv)
+        }, 5000)
+    } else {
+        showSection(msgDiv)
+        msgsParagraph.innerText = messages[msg];
+        setTimeout(() => {
+            hideSection(msgDiv)
+        }, 2500)
+    }
+}
+
+const victory = () => {
+    hideSection(mazeDiv);
+    showSection(victoryScreen)
+}
+
 startGame.addEventListener('click', () => {
+    if (!songPlaying){
+        playSong()
+    }
+    gameLevel = 1
     generateMaze(gameLevel)
     toggleKeyboardListener();
     hideSection(openingDiv);
     showSection(mazeDiv);
+    showMsg('intro')
 })
 
-// estava fazendo as mensagens, preciso fazer a div que mostra as mensagens e a tela de transicao //
+backToMenu.addEventListener('click', () => {
+    hideSection(victoryScreen)
+    showSection(openingDiv)
+})
+
+audioPlayButton.addEventListener('click', playSong)

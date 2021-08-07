@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="assets/favicon.png"/>
+
+    <!-- Fontes --> 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
-    <title>Labirin</title>
+    <title>INTO THE MAZE</title>
 </head>
 <body>
+    <div class="audio">
+        <img src="assets/audio/play.png" alt="play.png">
+    </div>
     <main>
+        
         <section class="opening opening-animation">
             <h1 class="opening__title">
                 <img src="assets/sprites/title.png" alt="title.png">
@@ -31,8 +42,16 @@
         <section class="mazeDiv none hidden">
             <div class="maze"></div>
         </section>
-        <section class="msgs">
-            <p></p>
+        <section class="msgs hidden none">
+            <p id="msgsText" class="msgs__text"></p>
+        </section>
+        <section class="victory hidden none">
+            <p>Congratulations, you took Zelda to safety of Hyrule Castle! Now, if you excuse me, I'll be satisfying my nostalgia with some <em>A Link to the Past</em>.</p>
+            <figure class="menu__fairy">
+                <img src="assets/sprites/fairy.gif" alt="fairy.gif">
+                <figcaption>Fairy gif</figcaption>
+            </figure>
+            <button id="backToMenu">BACK TO MENU</button>
         </section>
     </main>
     <script src="script.js"></script>
