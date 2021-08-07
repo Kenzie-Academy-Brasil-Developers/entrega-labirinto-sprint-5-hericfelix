@@ -118,7 +118,7 @@ const cellClasses =  {
 const messages = {
     'intro': "Use the arrow keys to make your way through the maze and find princess Zelda!",
     'next': "You're one step closer to finding her!",
-    'hole': "You fell into a hole. Try again!",
+    'hole': "You fell into the hole. Try again!",
     'ganon': "You can't face Ganon with the power you have now."
 }
 
